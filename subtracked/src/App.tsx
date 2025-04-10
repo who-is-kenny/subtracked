@@ -48,6 +48,13 @@ function App() {
   }, [subscriptions]);
 
   const handleDelete = (id: string) => {
+    // Confirm deletion
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this subscription?"
+    );
+    if (!confirmDelete) return;
+
+    // delete subscription
     const updatedSubscriptions = subscriptions.filter(
       (subscription) => subscription.id !== id
     );
