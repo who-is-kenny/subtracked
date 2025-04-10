@@ -1,10 +1,37 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { Subscription } from "./types";
 
 function App() {
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
-  // const [count, setCount] = useState(0)
+
+  // helper functions to save and load data from local storage
+  const saveToLocalStorage = (data: Subscription[]) => {
+    localStorage.setItem("subscriptions", JSON.stringify(data));
+  };
+  const loadFromLocalStorage = (): Subscription[] => {
+    try {
+      const data = localStorage.getItem("subscriptions");
+      if (!data) return [];
+  
+      const parsed = JSON.parse(data) as Subscription[];
+  
+      // Convert startDate and endDate back to Date object or else doesnt work
+      // when loading from local storage
+      return parsed.map((sub) => ({
+        ...sub,
+        startDate: new Date(sub.startDate),
+        endDate: new Date(sub.endDate),
+      }));
+    } catch (error) {
+      console.error("Failed to parse subscriptions from localStorage:", error);
+      return [];
+    }
+  };
+  
+  
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>(loadFromLocalStorage);
+
   const [formData, setFormData] = useState<Subscription>({
     id: "",
     name: "",
@@ -16,6 +43,10 @@ function App() {
     category: "",
     notes: "",
   });
+  
+  useEffect(() => {
+    saveToLocalStorage(subscriptions);
+  }, [subscriptions]);
 
   return (
     <>
@@ -133,6 +164,17 @@ function App() {
 
         <button type="submit">Add Subscription</button>
       </form>
+
+    {/* Add the subscription list here 
+    use this to test if there form is working*/}
+    <h2>Subscriptions</h2>
+    <ul>
+      {subscriptions.map((sub) => (
+        <li key={sub.id}>
+          {sub.name} - ${sub.price} - {sub.billingCycle} - Next: {sub.startDate.toLocaleDateString()} - {sub.status} - {sub.category} - {sub.notes}
+        </li>
+      ))}
+    </ul>
     </>
   );
 }
