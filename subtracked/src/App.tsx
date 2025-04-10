@@ -4,7 +4,6 @@ import "./App.css";
 import { Subscription } from "./types";
 
 function App() {
-
   // helper functions to save and load data from local storage
   const saveToLocalStorage = (data: Subscription[]) => {
     localStorage.setItem("subscriptions", JSON.stringify(data));
@@ -13,9 +12,9 @@ function App() {
     try {
       const data = localStorage.getItem("subscriptions");
       if (!data) return [];
-  
+
       const parsed = JSON.parse(data) as Subscription[];
-  
+
       // Convert startDate and endDate back to Date object or else doesnt work
       // when loading from local storage
       return parsed.map((sub) => ({
@@ -28,9 +27,9 @@ function App() {
       return [];
     }
   };
-  
-  
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>(loadFromLocalStorage);
+
+  const [subscriptions, setSubscriptions] =
+    useState<Subscription[]>(loadFromLocalStorage);
 
   const [formData, setFormData] = useState<Subscription>({
     id: "",
@@ -43,10 +42,17 @@ function App() {
     category: "",
     notes: "",
   });
-  
+
   useEffect(() => {
     saveToLocalStorage(subscriptions);
   }, [subscriptions]);
+
+  const handleDelete = (id: string) => {
+    const updatedSubscriptions = subscriptions.filter(
+      (subscription) => subscription.id !== id
+    );
+    setSubscriptions(updatedSubscriptions);
+  };
 
   return (
     <>
@@ -165,16 +171,25 @@ function App() {
         <button type="submit">Add Subscription</button>
       </form>
 
-    {/* Add the subscription list here 
+      {/* Add the subscription list here 
     use this to test if there form is working*/}
-    <h2>Subscriptions</h2>
-    <ul>
-      {subscriptions.map((sub) => (
-        <li key={sub.id}>
-          {sub.name} - ${sub.price} - {sub.billingCycle} - Next: {sub.startDate.toLocaleDateString()} - {sub.status} - {sub.category} - {sub.notes}
-        </li>
-      ))}
-    </ul>
+      <h2>Subscriptions</h2>
+      <ul>
+        {subscriptions.map((sub) => (
+          <li key={sub.id}>
+            {sub.name} - ${sub.price} - {sub.billingCycle} - Next:{" "}
+            {sub.startDate.toLocaleDateString()} - {sub.status} - {sub.category}{" "}
+            - {sub.notes}
+            {/* Remove button */}
+            <button
+              onClick={() => handleDelete(sub.id)}
+              style={{ marginLeft: "10px" }}
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
