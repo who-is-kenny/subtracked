@@ -1,10 +1,11 @@
-type Subscription = {
+export type Subscription = {
     id: string;
     name: string;
     price: number;
-    billingcycle: "monthly" | "yearly" | "weekly";
+    billingCycle: "Monthly" | "Yearly" | "Weekly";
     startDate: Date;
     endDate: Date;
-    status: "active" | "active_cancelled" | "inactive" | "cancelled";
+    status: "Active" | "Active_cancelled" | "Inactive" | "Cancelled";
+    category: string;
     notes: string;
 }
