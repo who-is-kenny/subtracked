@@ -114,6 +114,9 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
       />
       <button type="submit">Add Subscription</button>
+      <button type="button" onClick={() => navigate("/")}>
+        Cancel
+      </button>
     </form>
   );
 }
