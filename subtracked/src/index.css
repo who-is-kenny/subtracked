@@ -170,3 +170,29 @@ form {
 .edit-form button {
   margin-right: 0.5rem;
 }
+
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%; /* Full width like subscription items */
+  height: 2rem; /* Adjust height to match subscription items */
+  border: 1px solid var(--color-dark);
+  border-radius: 6px;
+  background-color: var(--color-secondary);
+  font-size: 2rem; /* Larger font size for the "+" symbol */
+  color: var(--color-dark);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 1rem; /* Add spacing below the button */
+  margin: 1rem auto; /* Center the button horizontally */
+}
+
+.add:hover {
+  background-color: var(--color-accent);
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.add:active {
+  transform: scale(0.95); /* Slightly shrink on click */
+}

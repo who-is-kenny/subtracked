@@ -163,13 +163,13 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
           </div>
           {expandedId === sub.id && (
             <div className="subscription-details">
-              <p>Price: ${sub.price}</p>
-              <p>Billing Cycle: {sub.billingCycle}</p>
-              <p>Next Payment: {sub.startDate.toLocaleDateString()}</p>
-              <p>End Date: {sub.endDate.toLocaleDateString()}</p>
-              <p>Status: {sub.status}</p>
-              <p>Category: {sub.category}</p>
-              <p>Notes: {sub.notes}</p>
+              <p><strong>Price:</strong> ${sub.price}</p>
+              <p><strong>Billing Cycle:</strong> {sub.billingCycle}</p>
+              <p><strong>Next Payment:</strong> {sub.startDate.toLocaleDateString()}</p>
+              <p><strong>End Date:</strong> {sub.endDate.toLocaleDateString()}</p>
+              <p><strong>Status: </strong>{sub.status}</p>
+              <p><strong>Category:</strong> {sub.category}</p>
+              <p><strong>Notes: </strong>{sub.notes}</p>
               <button
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent triggering the toggle
