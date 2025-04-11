@@ -9,6 +9,8 @@ type Props = {
 
 function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editFormData, setEditFormData] = useState<Subscription | null>(null);
 
   const handleToggle = (id: string) => {
     setExpandedId(expandedId === id ? null : id);
@@ -19,6 +21,85 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
     setSubscriptions(updated);
   };
 
+  const handleEdit = (id: string) => {
+    const subscriptionToEdit = subscriptions.find((sub) => sub.id === id);
+    if (subscriptionToEdit) {
+      setEditingId(id);
+      setEditFormData({ ...subscriptionToEdit });
+    }
+  };
+
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    if (editFormData) {
+      setEditFormData({
+        ...editFormData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  const handleEditSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editFormData) {
+      const updatedSubscriptions = subscriptions.map((sub) =>
+        sub.id === editingId ? { ...editFormData, id: sub.id } : sub
+      );
+      setSubscriptions(updatedSubscriptions);
+      setEditingId(null);
+      setEditFormData(null);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setEditFormData(null);
+  };
+
+  if (editingId) {
+    // Render the edit form when editing
+    return (
+      <form className="edit-form" onSubmit={handleEditSubmit}>
+        <h2>Edit Subscription</h2>
+        <input
+          type="text"
+          name="name"
+          value={editFormData?.name || ""}
+          onChange={handleEditChange}
+          placeholder="Name"
+          required
+        />
+        <input
+          type="number"
+          name="price"
+          value={editFormData?.price || ""}
+          onChange={handleEditChange}
+          placeholder="Price"
+          required
+        />
+        <select
+          name="billingCycle"
+          value={editFormData?.billingCycle || ""}
+          onChange={handleEditChange}
+        >
+          <option value="Monthly">Monthly</option>
+          <option value="Yearly">Yearly</option>
+          <option value="Weekly">Weekly</option>
+        </select>
+        <textarea
+          name="notes"
+          value={editFormData?.notes || ""}
+          onChange={handleEditChange}
+          placeholder="Notes"
+        />
+        <button type="submit">Save</button>
+        <button type="button" onClick={handleCancelEdit}>
+          Cancel
+        </button>
+      </form>
+    );
+  }
+
+  // Render the subscription list when not editing
   return (
     <ul className="subscription-list">
       {subscriptions.map((sub) => (
@@ -38,11 +119,21 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
               <p>Status: {sub.status}</p>
               <p>Category: {sub.category}</p>
               <p>Notes: {sub.notes}</p>
-              <button onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering the toggle
-                handleDelete(sub.id);
-              }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering the toggle
+                  handleDelete(sub.id);
+                }}
+              >
                 Remove
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering the toggle
+                  handleEdit(sub.id);
+                }}
+              >
+                Edit
               </button>
             </div>
           )}
