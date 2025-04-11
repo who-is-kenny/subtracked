@@ -21,14 +21,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.page-container {
+  max-width: 800px; /* Set a consistent width */
+  margin: 0 auto; /* Center the content */
+  padding: 1rem; /* Add consistent padding */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Ensure the extension width is always 400px */
 body {
-  margin: 0;
+  width: 400px; /* Fixed width for the extension */
+  margin: 0 auto; /* Center the content horizontally */
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
   background-color: var(--color-bg);
   color: var(--color-text);
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#root {
+  width: 100%; /* Ensure the root container takes the full width of the body */
+  max-width: 400px; /* Prevent it from exceeding the fixed width */
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box; /* Include padding in the width calculation */
 }
 
 h1, h2 {
@@ -86,7 +104,8 @@ form {
 .subscription-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto; /* Center the list */
+  max-width: 600px; /* Limit the width */
 }
 
 .subscription-item {

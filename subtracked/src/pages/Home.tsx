@@ -12,7 +12,7 @@ function Home({ subscriptions, setSubscriptions }: Props) {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className='page-container'>
       <h1>Subscriptions</h1>
       <SubscriptionList subscriptions={subscriptions} setSubscriptions={setSubscriptions} />
       <button className='add' onClick={() => navigate('/add')}>+</button>
