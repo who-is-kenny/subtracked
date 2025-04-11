@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Subscription } from "../types/types";
+import { Subscription } from "../types/SubscriptionType";
 
 type Props = {
   subscriptions: Subscription[];

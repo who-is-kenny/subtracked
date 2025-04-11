@@ -1,5 +1,5 @@
 // src/components/SubscriptionList.tsx
-import { Subscription } from '../types/types';
+import { Subscription } from '../types/SubscriptionType';
 
 type Props = {
   subscriptions: Subscription[];

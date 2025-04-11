@@ -1,7 +1,7 @@
 // src/pages/Home.tsx
 import { useNavigate } from 'react-router-dom';
 import SubscriptionList from '../components/SubscriptionList';
-import { Subscription } from '../types/types';
+import { Subscription } from '../types/SubscriptionType';
 
 type Props = {
   subscriptions: Subscription[];

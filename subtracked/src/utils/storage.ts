@@ -1,5 +1,5 @@
 // src/utils/storage.ts
-import { Subscription } from "../types/types";
+import { Subscription } from "../types/SubscriptionType";
 
 // helper functions to save and load data from local storage
 const saveToLocalStorage = (data: Subscription[]) => {

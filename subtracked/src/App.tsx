@@ -1,7 +1,7 @@
 // src/App.tsx
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Subscription } from './types/types';
+import { Subscription } from './types/SubscriptionType';
 import { saveToLocalStorage, loadFromLocalStorage } from './utils/storage';
 import Home from './pages/Home';
 import AddSubscription from './pages/AddSubscription';
