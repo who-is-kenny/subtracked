@@ -14,8 +14,8 @@ function Home({ subscriptions, setSubscriptions }: Props) {
   return (
     <div>
       <h1>Subscriptions</h1>
-      <button onClick={() => navigate('/add')}>Add Subscription</button>
       <SubscriptionList subscriptions={subscriptions} setSubscriptions={setSubscriptions} />
+      <button onClick={() => navigate('/add')}>Add Subscription</button>
     </div>
   );
 }

@@ -56,6 +56,20 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
     setEditFormData(null);
   };
 
+  const getWarningClass = (endDate: Date) => {
+    const today = new Date();
+    const timeDiff = new Date(endDate).getTime() - today.getTime();
+    const daysRemaining = timeDiff / (1000 * 60 * 60 * 24);
+
+    if (daysRemaining <= 7) {
+      return "dot-red"; // Less than a week
+    } else if (daysRemaining <= 30) {
+      return "dot-yellow"; // Less than a month
+    } else {
+      return "dot-green"; // More than a month
+    }
+  };
+
   if (editingId) {
     // Render the edit form when editing
     return (
@@ -143,12 +157,16 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
           }`}
           onClick={() => handleToggle(sub.id)}
         >
-          <div className="subscription-name">{sub.name}</div>
+          <div className="subscription-name">
+            {sub.name}
+            <span className={`status-dot ${getWarningClass(sub.endDate)}`}></span>
+          </div>
           {expandedId === sub.id && (
             <div className="subscription-details">
               <p>Price: ${sub.price}</p>
               <p>Billing Cycle: {sub.billingCycle}</p>
               <p>Next Payment: {sub.startDate.toLocaleDateString()}</p>
+              <p>End Date: {sub.endDate.toLocaleDateString()}</p>
               <p>Status: {sub.status}</p>
               <p>Category: {sub.category}</p>
               <p>Notes: {sub.notes}</p>

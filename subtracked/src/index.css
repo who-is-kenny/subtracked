@@ -4,6 +4,9 @@
   --color-accent: #b9b28a;
   --color-dark: #504b38;
   --color-text: #504b38;
+  --color-green-warning: #CCE0AC;
+  --color-red-warning: #FF8A8A;
+  --color-yellow-warning: #F0EAAC;
 
   font-family: 'Courier New', Courier, monospace;
   line-height: 1.6;
@@ -59,6 +62,17 @@ input, select, textarea {
   font-family: inherit;
 }
 
+select{
+  width: 85%;
+  padding: 0.5em;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-dark);
+  border-radius: 4px;
+  background-color: #fff;
+  color: var(--color-dark);
+  font-family: inherit;
+}
+
 form {
   background-color: var(--color-secondary);
   padding: 2rem;
@@ -79,8 +93,10 @@ form {
   border: 1px solid var(--color-dark);
   border-radius: 6px;
   padding: 1rem;
+  margin-bottom: 1rem;
   background-color: var(--color-secondary);
   cursor: pointer;
+  position: relative;
   transition: background-color 0.3s ease;
 }
 
@@ -89,8 +105,30 @@ form {
 }
 
 .subscription-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-weight: bold;
   color: var(--color-dark);
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 1rem;
+}
+
+.status-dot.dot-green {
+  background-color: var(--color-green-warning);
+}
+
+.status-dot.dot-yellow {
+  background-color: var(--color-yellow-warning);
+}
+
+.status-dot.dot-red {
+  background-color: var(--color-red-warning);
 }
 
 .subscription-details {
@@ -114,7 +152,15 @@ form {
 .edit-form input,
 .edit-form select,
 .edit-form textarea {
-  width: 100%;
+  width: 80%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-dark);
+  border-radius: 4px;
+}
+
+.edit-form select {
+  width: 85%;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   border: 1px solid var(--color-dark);
