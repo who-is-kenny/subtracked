@@ -31,9 +31,10 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     if (editFormData) {
+      const { name, value } = e.target;
       setEditFormData({
         ...editFormData,
-        [e.target.name]: e.target.value,
+        [name]: name === "startDate" || name === "endDate" ? new Date(value) : value,
       });
     }
   };
@@ -85,6 +86,38 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
           <option value="Yearly">Yearly</option>
           <option value="Weekly">Weekly</option>
         </select>
+        <input
+          type="date"
+          name="startDate"
+          value={editFormData?.startDate.toISOString().split("T")[0] || ""}
+          onChange={handleEditChange}
+          required
+        />
+        <input
+          type="date"
+          name="endDate"
+          value={editFormData?.endDate.toISOString().split("T")[0] || ""}
+          onChange={handleEditChange}
+          required
+        />
+        <select
+          name="status"
+          value={editFormData?.status || ""}
+          onChange={handleEditChange}
+        >
+          <option value="Active">Active</option>
+          <option value="Active_cancelled">Active_cancelled</option>
+          <option value="Inactive">Inactive</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+        <input
+          type="text"
+          name="category"
+          value={editFormData?.category || ""}
+          onChange={handleEditChange}
+          placeholder="Category"
+          required
+        />
         <textarea
           name="notes"
           value={editFormData?.notes || ""}
