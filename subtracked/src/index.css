@@ -223,18 +223,37 @@ form {
   margin-top: 1rem;
 }
 
-.settings-section label {
+.settings-label {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-.settings-section input[type="color"] {
-  margin-left: 1rem;
-  width: 50px;
-  height: 30px;
-  border: none;
-  cursor: pointer;
+.settings-label input[type="number"] {
+  width: 60px;
+  padding: 0.5rem;
+  border: 1px solid var(--color-dark);
+  border-radius: 4px;
+}
+
+.color-box {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; /* Makes the box a circle */
+  display: inline-block;
+}
+
+.color-box.red {
+  background-color: #ff8a8a; /* Red color */
+}
+
+.color-box.yellow {
+  background-color: #f0eaac; /* Yellow color */
+}
+
+.color-box.green {
+  background-color: #cce0ac; /* Green color */
 }
 
 .save-settings {
