@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type StatusDurations = {
-  green: number; // Days for "More than a month"
+//   green: number; // Days for "More than a month"
   yellow: number; // Days for "Less than a month"
   red: number; // Days for "Less than a week"
 };
@@ -12,7 +12,7 @@ function Settings() {
     const savedDurations = localStorage.getItem("statusDurations");
     return savedDurations
       ? JSON.parse(savedDurations)
-      : { green: 30, yellow: 7, red: 3 }; // Default durations
+      : { yellow: 30, red: 7 }; // Default durations
   });
 
   const handleDurationChange = (status: keyof StatusDurations, value: number) => {
@@ -35,11 +35,11 @@ function Settings() {
       <p>Customize the duration thresholds for subscription statuses:</p>
       <div className="settings-section">
         <label>
-          <span>Green (More than this many days):</span>
+          <span>Red (Less than this many days):</span>
           <input
             type="number"
-            value={durations.green}
-            onChange={(e) => handleDurationChange("green", Number(e.target.value))}
+            value={durations.red}
+            onChange={(e) => handleDurationChange("red", Number(e.target.value))}
             min="1"
           />
         </label>
@@ -53,13 +53,7 @@ function Settings() {
           />
         </label>
         <label>
-          <span>Red (Less than this many days):</span>
-          <input
-            type="number"
-            value={durations.red}
-            onChange={(e) => handleDurationChange("red", Number(e.target.value))}
-            min="1"
-          />
+          <span>Green (More than {durations.yellow} days): </span>
         </label>
       </div>
       <button className="save-settings" onClick={handleSave}>
