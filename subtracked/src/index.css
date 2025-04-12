@@ -215,3 +215,38 @@ form {
 .add:active {
   transform: scale(0.95); /* Slightly shrink on click */
 }
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.settings-section label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-section input[type="color"] {
+  margin-left: 1rem;
+  width: 50px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.save-settings {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-settings:hover {
+  background-color: var(--color-dark);
+}

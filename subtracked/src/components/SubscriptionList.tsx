@@ -60,13 +60,20 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
     const today = new Date();
     const timeDiff = new Date(endDate).getTime() - today.getTime();
     const daysRemaining = timeDiff / (1000 * 60 * 60 * 24);
-
-    if (daysRemaining <= 7) {
-      return "dot-red"; // Less than a week
-    } else if (daysRemaining <= 30) {
-      return "dot-yellow"; // Less than a month
+  
+    const savedDurations = JSON.parse(localStorage.getItem("statusDurations") || "{}");
+    const greenThreshold = savedDurations.green || 30; // Default: 30 days
+    const yellowThreshold = savedDurations.yellow || 7; // Default: 7 days
+    const redThreshold = savedDurations.red || 3; // Default: 3 days
+  
+    if (daysRemaining <= redThreshold) {
+      return "dot-red"; // Less than red threshold
+    } else if (daysRemaining <= yellowThreshold) {
+      return "dot-yellow"; // Less than yellow threshold
+    } else if (daysRemaining <= greenThreshold) {
+      return "dot-green"; // Less than green threshold
     } else {
-      return "dot-green"; // More than a month
+      return "dot-green"; // Default to green
     }
   };
 
