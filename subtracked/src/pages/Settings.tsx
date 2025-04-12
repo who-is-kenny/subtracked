@@ -34,8 +34,8 @@ function Settings() {
       <p>Customize the duration thresholds for subscription statuses:</p>
       <div className="settings-section">
         <label className="settings-label">
-          <span>
-            <strong>Red</strong> (Less than this many days):
+          <span className="status-text">
+            <strong>Red</strong> &nbsp; (Less than this many days)
           </span>
           <input
             type="number"
@@ -46,8 +46,8 @@ function Settings() {
           <span className="color-box red"></span>
         </label>
         <label className="settings-label">
-          <span>
-            <strong>Yellow</strong> (Less than this many days):
+          <span className="status-text">
+            <strong>Yellow</strong> &nbsp; (Less than this many days)
           </span>
           <input
             type="number"
@@ -58,9 +58,11 @@ function Settings() {
           <span className="color-box yellow"></span>
         </label>
         <label className="settings-label">
-          <span>
-            <strong>Green</strong> (More than {durations.yellow} days):
+          <span className="status-text">
+            <strong>Green</strong> &nbsp; (More than {durations.yellow} days)
           </span>
+          <span className="placeholder"></span>
+        
           <span className="color-box green"></span>
         </label>
       </div>
