@@ -1,11 +1,12 @@
 {
-    "manifest_version":3,
-    "version":"1.0",
-    "name":"Subtracked",
+    "manifest_version": 3,
+    "version": "1.0",
+    "name": "Subtracked",
     "action": {
         "default_popup": "index.html"
     },
     "permissions": [
-        "scripting"
+        "scripting",
+        "notifications"
     ]
 }
