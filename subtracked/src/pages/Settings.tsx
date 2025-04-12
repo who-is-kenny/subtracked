@@ -70,7 +70,7 @@ function Settings() {
     <div className="page-container">
       <h1>Settings</h1>
       <h2>Warning Threshold</h2>
-      <p>Customize the duration thresholds for subscription statuses:</p>
+      <p>Customize the duration thresholds for subscription statuses</p>
       <div className="settings-section">
         <label className="settings-label">
           <span className="status-text">
@@ -105,9 +105,11 @@ function Settings() {
         </label>
       </div>
       <h2>Notifications</h2>
+      <p>Notifications will be sent when warning status changes</p>
       <div className="settings-section">
         <label className="settings-label">
-          <span className="status-text">Enable Notifications:</span>
+          <span className="status-text">
+            <strong>Enable Notifications:</strong></span>
           <input
             type="checkbox"
             checked={notificationsEnabled}
