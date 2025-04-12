@@ -31,6 +31,7 @@ function Settings() {
   return (
     <div className="page-container">
       <h1>Settings</h1>
+      <h2>Warning Threshold</h2>
       <p>Customize the duration thresholds for subscription statuses:</p>
       <div className="settings-section">
         <label className="settings-label">
@@ -66,6 +67,7 @@ function Settings() {
           <span className="color-box green"></span>
         </label>
       </div>
+      <h2>Email Notifications</h2>
       <button className="save-settings" onClick={handleSave}>
         Save
       </button>
