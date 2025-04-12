@@ -285,3 +285,10 @@ form {
   height: 2.5rem; /* Match the height of the input box (adjust as needed) */
   display: inline-block; /* Ensure it behaves like an inline element */
 }
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--color-dark);
+}

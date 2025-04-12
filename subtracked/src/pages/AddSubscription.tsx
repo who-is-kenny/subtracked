@@ -34,6 +34,8 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Add Subscription</h2>
+      
+      <label className="form-label">Name:</label>
       <input
         type="text"
         placeholder="Name"
@@ -41,6 +43,8 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         required
       />
+      
+      <label className="form-label">Price:</label>
       <input
         type="number"
         placeholder="Price"
@@ -50,6 +54,8 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         }
         required
       />
+      
+      <label className="form-label">Billing Cycle:</label>
       <select
         value={formData.billingCycle}
         onChange={(e) =>
@@ -63,6 +69,8 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         <option value="Yearly">Yearly</option>
         <option value="Weekly">Weekly</option>
       </select>
+      
+      <label className="form-label">Start Date:</label>
       <input
         type="date"
         value={formData.startDate.toISOString().split("T")[0]}
@@ -74,7 +82,8 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         }
         required
       />
-
+      
+      <label className="form-label">End Date:</label>
       <input
         type="date"
         value={formData.endDate.toISOString().split("T")[0]}
@@ -86,7 +95,8 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         }
         required
       />
-
+      
+      <label className="form-label">Status:</label>
       <select
         value={formData.status}
         onChange={(e) =>
@@ -101,6 +111,8 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         <option value="Inactive">Inactive</option>
         <option value="Cancelled">Cancelled</option>
       </select>
+      
+      <label className="form-label">Category:</label>
       <input
         type="text"
         placeholder="Category"
@@ -108,11 +120,14 @@ function AddSubscriptionForm({ subscriptions, setSubscriptions }: Props) {
         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
         required
       />
+      
+      <label className="form-label">Notes:</label>
       <textarea
         placeholder="Notes (optional)"
         value={formData.notes}
         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
       />
+      
       <button type="submit">Add Subscription</button>
       <button type="button" onClick={() => navigate("/")}>
         Cancel

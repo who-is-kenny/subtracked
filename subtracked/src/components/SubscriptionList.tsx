@@ -169,7 +169,7 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
             <div className="subscription-details">
               <p><strong>Price:</strong> ${sub.price}</p>
               <p><strong>Billing Cycle:</strong> {sub.billingCycle}</p>
-              <p><strong>Next Payment:</strong> {sub.startDate.toLocaleDateString()}</p>
+              <p><strong>Start Date:</strong> {sub.startDate.toLocaleDateString()}</p>
               <p><strong>End Date:</strong> {sub.endDate.toLocaleDateString()}</p>
               <p><strong>Status: </strong>{sub.status}</p>
               <p><strong>Category:</strong> {sub.category}</p>
