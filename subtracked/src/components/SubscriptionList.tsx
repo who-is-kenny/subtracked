@@ -1,5 +1,6 @@
 // src/components/SubscriptionList.tsx
 import { useState } from "react";
+import { useEffect } from "react";
 import { Subscription } from "../types/SubscriptionType";
 
 type Props = {
@@ -71,6 +72,47 @@ function SubscriptionList({ subscriptions, setSubscriptions }: Props) {
       return "dot-yellow"; // Less than yellow threshold
     } else {
       return "dot-green"; // Default to green
+    }
+  };
+
+  useEffect(() => {
+    const previousStatuses = JSON.parse(localStorage.getItem("previousStatuses") || "{}");
+
+    const updatedStatuses = subscriptions.map((sub) => {
+      const status = getWarningClass(sub.endDate);
+
+      // Notify if the status has changed
+      if (previousStatuses[sub.id] && previousStatuses[sub.id] !== status) {
+        let temp = "";
+        if (status === "dot-red") {
+          temp = "Red";
+        } else if (status === "dot-yellow") {
+          temp = "Yellow";
+        } else if (status === "dot-green") {
+          temp = "Green";
+        }
+        sendNotification(sub.name, temp);
+      }
+
+      return { id: sub.id, status };
+    });
+
+    // Save the updated statuses to localStorage
+    const statusMap = updatedStatuses.reduce<Record<string, string>>((acc, sub) => {
+      acc[sub.id] = sub.status;
+      return acc;
+    }, {});
+    localStorage.setItem("previousStatuses", JSON.stringify(statusMap));
+  }, [subscriptions]);
+
+  const sendNotification = (subscriptionName: string, newStatus: string) => {
+    if (Notification.permission === "granted") {
+      new Notification("Subscription Status Changed", {
+        body: `${subscriptionName} is now ${newStatus}.`,
+        icon: "/path/to/icon.png", // Replace with your actual icon path
+      });
+    } else {
+      console.log("Notifications are disabled or not supported.");
     }
   };
 
